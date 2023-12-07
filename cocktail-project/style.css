@@ -57,6 +57,26 @@ font-family: 'Poppins', sans-serif;
   padding: 8px; /* Adjust as needed for spacing */
   cursor: pointer;
 }
+
+#cocktailNotFound {
+  display: none; /* Initially hide the element */
+  /* Other styles as needed */
+}
+
+.cocktail-body {
+  display: none; /* Initially show the element */
+  /* Other styles as needed */
+ /* flex-direction: column;
+    align-items: center;
+    justify-content: center;*/
+    margin-block: 20px; 
+}
+.cocktail-body img{
+  width: 30%;
+  height: 30%;
+  
+}
+
 @media screen and (max-width: 1500px) {
   .hero-text {
     font-size: 20px; /* Adjust the font size for smaller screens */
