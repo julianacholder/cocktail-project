@@ -1,6 +1,6 @@
 # Cocktail Generator 🍹
 
-Welcome to the Cocktail Generator, your go-to source for discovering delicious cocktail recipes! Whether you have a specific cocktail in mind or you're feeling adventurous and want to try something new, this project has you covered.
+Welcome to the Cocktail Club, your go-to source for discovering delicious cocktail recipes! Whether you have a specific cocktail in mind or you're feeling adventurous and want to try something new, this project has you covered.
 
 ## How It Works
 
