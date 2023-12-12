@@ -1,13 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Source+Serif+4:opsz,wght@8..60,700&family=Young+Serif&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,700&family=Young+Serif&display=swap');
 body, html {
   height: 100%;
+  font-family: 'Poppins', sans-serif;
+  background-color: rgb(247, 243, 243);
+ 
+  
 }
 
 /* The hero image */
 .hero-image {
 /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
 background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), 
-url("new\ img.png");
+url("images/new\ img.png");
 
 /* Set a specific height */
 height: 60%;
@@ -32,7 +37,7 @@ font-family: 'Poppins', sans-serif;
 .input-container{
   text-align: center;
   margin-top: 130px;
-  margin-right: 25%;
+  margin-right: 20%;
 }
 .input-bar {
   padding: 20px;
@@ -41,10 +46,15 @@ font-family: 'Poppins', sans-serif;
   width: 43%;
   border-color: grey;
   border-style: solid;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
   
   
 }
-.input-container button{
+
+#searchButton{
+  padding: 8px; /* Adjust as needed for spacing */
+  cursor: pointer;
   width: 43px;
   height: 43px;
   border-radius: 50%;
@@ -53,28 +63,52 @@ font-family: 'Poppins', sans-serif;
   background-color: rgb(72, 122, 72);
   border: none ;
 }
-#searchButton{
-  padding: 8px; /* Adjust as needed for spacing */
+#searchButton:hover{
+  background-color: grey;
+}
+button:hover{
+  background-color: grey;
+}
+
+.moreButton{
+  background-color: rgb(72, 122, 72);
+  border: gainsboro ;
+  padding: 18px;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 80px;
+  font-size: 15px;
   cursor: pointer;
+  margin-left: 150px;
 }
 
 #cocktailNotFound {
-  display: none; /* Initially hide the element */
+  display: flex;
+   /* Initially hide the element */
   /* Other styles as needed */
+  
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  margin-top: 40px;
 }
 
-.cocktail-body {
-  display: none; /* Initially show the element */
-  /* Other styles as needed */
- /* flex-direction: column;
-    align-items: center;
-    justify-content: center;*/
-    margin-block: 20px; 
+
+.cocktail-body{
+  margin-left: 18%;
 }
-.cocktail-body img{
-  width: 30%;
-  height: 30%;
-  
+
+#cocktailNotFound img{
+  max-width: 35%;
+  height: 18%;
+}
+
+#result img {
+  display: block;
+  max-width: 35%;
+  margin-left: 18%;
+  margin-top: 40px;
+  height: 18%;
 }
 
 @media screen and (max-width: 1500px) {
@@ -85,5 +119,21 @@ font-family: 'Poppins', sans-serif;
   }
   .hero-image{
     height: 40%;
+  }
+
+  .moreButton {
+    /*padding: 15px;
+    border-radius: 80px;
+    font-size: 15px;
+    cursor: pointer; */
+    margin-left: 50px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+
+  .moreButton{
+    margin-right: 100px;
+    margin-top: 10px;
   }
 }

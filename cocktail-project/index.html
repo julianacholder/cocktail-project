@@ -16,19 +16,24 @@
     </div>
   </div>
   <div class="input-container">
-  <input id="input" class="input-bar" type="text" placeholder="Enter a Cocktail name">
+  <input id="input" class="input-bar" type="text" value="" placeholder="Enter a Cocktail name">
   <button class="fas fa-search fa-lg" id="searchButton"></button>
+  <button class="moreButton">Find more recipe</button>
 
-  <div class="cocktail-body">
-   <img src="images/manhattan.png" alt="Cocktail Image" class="cocktail-img">
-   <p id="result">Cocktail</p>
 </div>
+  
+  
+  <div class="cocktail-body">
+   <p id="result"></p>
+   <p class="ingredients"></p>
+</div>
+
 
   <div id="cocktailNotFound">
     <h1>Oops, Drink not found!</h1>
-    <img src="images/404.png" alt="Error">
+    <img src="images/404.png" alt="Error" class="error-img">
 </div>
 </div>
-  <script src="test2.js"></script>
+  <script src="cocktail.js"></script>
 </body>
 </html>

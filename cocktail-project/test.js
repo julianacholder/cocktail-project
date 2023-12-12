@@ -1,46 +1,72 @@
-document.addEventListener('DOMContentLoaded', function() {
-  const searchButton = document.getElementById('searchButton');
-  const input = document.getElementById('input');
-  const resultElement = document.getElementById('result');
+document.addEventListener('DOMContentLoaded', function () {
+  const searchUrl = "https://thecocktaildb.com/api/json/v1/1/search.php?s=";
+  const randomUrl = "https://thecocktaildb.com/api/json/v1/1/random.php";
+  const result = document.getElementById("result");
+  const errorImg = document.querySelector('.error-img');
+  const cocktailNotFound = document.getElementById('cocktailNotFound');
+  const cocktailBody = document.querySelector('.cocktail-body');
+  const inputBar = document.querySelector('.input-bar');
+  const searchButton = document.getElementById("searchButton");
+  const moreButton = document.querySelector(".moreButton");
 
-  searchButton.addEventListener('click', async () => {
-    const userInput = input.value;
+  const fetchCocktailData = (url, clearInput = false) => {
+    const input = inputBar.value.trim();
 
-    if (userInput.trim() !== '') {
-      try {
-        const cocktailData = await getCocktail(userInput);
-
-        // Display the result on the page
-        resultElement.innerHTML = `<p>Name: ${cocktailData.ingredients}</p>
-                                   <p>Category: ${cocktailData.category}</p>
-                                   <p>Instructions: ${cocktailData.instructions}</p>`;
-      } catch (error) {
-        // Handle the error, log it, or display a user-friendly message
-        console.error('Error:', error.message);
-      }
+    if (input === "" && !clearInput) {
+      result.innerHTML = `<h3 class="msg">The input field cannot be empty</h3>`;
+      return;
     }
-  });
+
+    if (clearInput) {
+      inputBar.value = "";
+    }
+
+    fetch(url + input)
+      .then(response => response.json())
+      .then(data => {
+        const myDrink = data.drinks ? data.drinks[0] : null;
+
+        if (!myDrink) {
+          throw new Error("Drink not found");
+        }
+
+        const count = 1;
+        const ingredients = [];
+
+        cocktailBody.style.display = "block";
+        cocktailNotFound.style.display = "none";
+
+        for (let i in myDrink) {
+          if (i.startsWith("strIngredient") && myDrink[i]) {
+            const ingredient = myDrink[i];
+            const measure = myDrink[`strMeasure${ingredients.length + 1}`] || "";
+            ingredients.push(`${measure} ${ingredient}`);
+          }
+        }
+
+        result.innerHTML = `
+          <img src="${myDrink.strDrinkThumb}" alt="${myDrink.strDrink}">
+          <h2>${myDrink.strDrink}</h2>
+          <h3>Ingredients:</h3>
+          <ul class="ingredients"></ul>
+          <h3>Instructions:</h3>
+          <div>${myDrink.strInstructions.replace(/\./g, '.<br>')}</div>`;
+
+        const ingredientsCon = document.querySelector(".ingredients");
+        ingredients.forEach((item) => {
+          const listItem = document.createElement("li");
+          listItem.innerText = item;
+          ingredientsCon.appendChild(listItem);
+        });
+      })
+      .catch(() => {
+        errorImg.src = "images/404.png";
+        cocktailNotFound.style.display = "block";
+        cocktailBody.style.display = "none";
+      });
+  };
+
+  window.addEventListener("load", () => fetchCocktailData(randomUrl, true));
+  searchButton.addEventListener("click", () => fetchCocktailData(searchUrl));
+  moreButton.addEventListener("click", () => fetchCocktailData(randomUrl, true));
 });
-
-async function getCocktail(cocktailName) {
-  const API_KEY = "XhuYb4gXJaOozJq4pK+Hqg==3uASeJmZpvwZs9Fi";
-  const apiURL = `https://api.api-ninjas.com/v1/cocktail?name=${cocktailName}`;
-
-  try {
-    const response = await fetch(apiURL, {
-      headers: {
-        'X-Api-Key': API_KEY,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`Network response was not ok. Status: ${response.status}`);
-    }
-
-    const cocktailData = await response.json();
-    return cocktailData;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    throw error; // Rethrow the error for the calling code to handle
-  }
-}
