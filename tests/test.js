@@ -1,3 +1,5 @@
+/* In this test file my code worked in generating random cocktail recipe but failed to get the recipe for the cocktail inputted by the user*/
+
 document.addEventListener('DOMContentLoaded', function () {
   const searchUrl = "https://thecocktaildb.com/api/json/v1/1/search.php?s=";
   const randomUrl = "https://thecocktaildb.com/api/json/v1/1/random.php";
